@@ -30,13 +30,13 @@ public class DB4O {
 					c.INFO_CLIENTE();
 					System.out.println("Articulo más vendido: "+v.articulo_mas_vendido());
 					v.media_por_articulo();
-					
+					System.out.println("El Cliente "+v.cliente_maximo()+" es el que más ha gastado ");
+					System.out.println("El Cliente "+v.cliente_mas_ventas()+ "  es el que más ventas tiene");
 					}
 					finally{
 					bd.close();
 					}
-					//Realizar operaciones o llamadas a métodos
-					
+				
 					
 					
 		}

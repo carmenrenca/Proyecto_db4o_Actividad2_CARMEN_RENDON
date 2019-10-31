@@ -1,14 +1,10 @@
 package Actividad2;
 
 import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import javax.xml.crypto.Data;
-
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 
@@ -27,6 +23,8 @@ public class Ventas {
 	
 	Map<Integer, Ventas> ventahasp = new HashMap<Integer, Ventas>();
 	Map<Integer, Integer> MaxVenta = new HashMap<Integer, Integer>();
+	static Map<Integer, Float> MaxCliente = new HashMap<Integer, Float>();
+	static Map<Integer, Integer> MaxVentaCliente = new HashMap<Integer, Integer>();
 	static Map<Integer, Float> lineaVenta = new HashMap<Integer,Float>();
 	public Ventas() {
 		
@@ -145,7 +143,7 @@ public class Ventas {
 		
 	}
 		
-	public String NUM_VENTAS(int cod_art) {
+	public int NUM_VENTAS(int cod_art) {
 		int c=0;
 		for(int i=0; i<this.listven.size(); i++) {
 			if(this.listven.get(i).getCodarti().getCodarti()==cod_art){
@@ -158,7 +156,7 @@ public class Ventas {
 		
 /////////////////////
 		
-		return "NUM_VENTAS "+c;
+		return c;
 	}
 	
 
@@ -187,6 +185,7 @@ public class Ventas {
 			  importe+=this.listven.get(i).getCodarti().getPvp()*this.listven.get(i).getUniven();
 		  }
 	  }
+	  this.MaxCliente.put(ncli, importe);
      return importe;
     }
 	
@@ -199,7 +198,7 @@ public class Ventas {
 				  n++;
 			  }
 		  }
-	
+	this.MaxVentaCliente.put(ncli, n);
 		return n;
 		
 	}
@@ -221,15 +220,53 @@ for (Entry<Integer, Integer> entry : this.MaxVenta.entrySet()) {
 	
 	public void media_por_articulo() {
 	
-		
-		//System.out.println("Media de importe de ventas del articulo"+art+this.SUMA_IMPORTE(art));
-		for (Entry<Integer, Float> entry : this.lineaVenta.entrySet()) {
+		float media=0;
+
+		for (Entry<Integer, Ventas> entry : this.ventahasp.entrySet()) {
 		    Integer key = entry.getKey();
 		    Object value = entry.getValue();
-		    System.out.println("La media del importe del articulo "+key+"es de: "+entry.getValue()/2);
+		 
+		   
+			media=(this.suma_uni(key)*this.ventahasp.get(key).getCodarti().getPvp())/this.NUM_VENTAS(key);
+
+			System.out.println("media articulo "+key+": "+media);
 		    // ...
 		}
+
 	}
+	
+	public int cliente_maximo() {
+		float n = 0;
+		int cli = 0;
+
+for (Entry<Integer, Float> entry : this.MaxCliente.entrySet()) {
+    Integer key = entry.getKey();
+    Object value = entry.getValue();
+   if(entry.getValue()>n) {
+	   n=entry.getValue();
+	   cli=key;
+   }
+}
+		return cli;
+	}
+	
+	public int cliente_mas_ventas(){
+		float n = 0;
+		int cli = 0;
+		
+for (Entry<Integer, Integer> entry : this.MaxVentaCliente.entrySet()) {
+
+    Integer key = entry.getKey();
+    Object value = entry.getValue();
+   if(entry.getValue()>n) {
+	   n=entry.getValue();
+	   cli=key;
+   }
+  
+}
+return cli;
+	}
+	
 
 	public void setCodventa(int codventa) {
 		this.codventa = codventa;

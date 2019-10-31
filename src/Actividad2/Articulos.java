@@ -107,7 +107,19 @@ public class Articulos {
 		mostrarResultado(res);
 		}
 		
+	/**	public void media_por_articulo() {
 		
+			Ventas v = new Ventas();
+			for (Entry<Integer, Articulos> entry : this.articulomap.entrySet()) {
+	
+			    Integer key = entry.getKey();
+			    Object value = entry.getValue();
+		v.media_por_articulo(key);
+			   
+			}
+			
+			
+		}*/
 		
 		
 
