@@ -21,14 +21,14 @@ public class DB4O {
 	    Articulos a= new Articulos();
 	    Ventas v = new Ventas();
 					try{
-						//GUARDAR_BASEDATOS();
-						
+					//GUARDAR_BASEDATOS();
 					c.muestraCliente(bd);
 					a.muestraArticulos(bd);
 					v.muestraVenta(bd);
 					v.INFO_ARTICULOS();
 					c.INFO_CLIENTE();
-					System.out.println("Articulo más vendido: "+v.articulo_mas_vendido());
+					System.out.println(v.articulo_mas_vendido());
+					System.out.println("MEDIA DE ARTICULOS");
 					v.media_por_articulo();
 					System.out.println("El Cliente "+v.cliente_maximo()+" es el que más ha gastado ");
 					System.out.println("El Cliente "+v.cliente_mas_ventas()+ "  es el que más ventas tiene");

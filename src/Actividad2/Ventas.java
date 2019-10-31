@@ -71,18 +71,18 @@ public class Ventas {
 		float n;
 		sumaunidadestotales(this.suma_uni(this.ventahasp.get(1).getCodarti().getCodarti()));
 		
-		System.out.println(this.ventahasp.get(1).ToString()+" - "+this.suma_uni(this.ventahasp.get(1).getCodarti().getCodarti())+" - "
-		+this.SUMA_IMPORTE(this.ventahasp.get(1).getCodarti().getCodarti())+" - "+this.NUM_VENTAS(this.ventahasp.get(1).getCodarti().getCodarti()));
+		System.out.println(this.ventahasp.get(1).ToString()+" - SUMA_UNI: "+this.suma_uni(this.ventahasp.get(1).getCodarti().getCodarti())+" - SUMA_IMPORTE: "
+		+this.SUMA_IMPORTE(this.ventahasp.get(1).getCodarti().getCodarti())+" - NUM_VENTAS: "+this.NUM_VENTAS(this.ventahasp.get(1).getCodarti().getCodarti()));
 
 		sumaunidadestotales(this.suma_uni(this.ventahasp.get(2).getCodarti().getCodarti()));
 		
-		System.out.println(this.ventahasp.get(2).ToString()+" - "+this.suma_uni(this.ventahasp.get(2).getCodarti().getCodarti())+" - "+
-		this.SUMA_IMPORTE(this.ventahasp.get(2).getCodarti().getCodarti())+" - "+this.NUM_VENTAS(this.ventahasp.get(2).getCodarti().getCodarti()));
+		System.out.println(this.ventahasp.get(2).ToString()+" - SUMA_UNI: "+this.suma_uni(this.ventahasp.get(2).getCodarti().getCodarti())+" - SUMA_IMPORTE: "+
+		this.SUMA_IMPORTE(this.ventahasp.get(2).getCodarti().getCodarti())+" - NUM_VENTAS: "+this.NUM_VENTAS(this.ventahasp.get(2).getCodarti().getCodarti()));
 		
 		sumaunidadestotales(this.suma_uni(this.ventahasp.get(6).getCodarti().getCodarti()));
 		
-		System.out.println(this.ventahasp.get(6).ToString()+" - "+this.suma_uni(this.ventahasp.get(6).getCodarti().getCodarti())+" - "+
-		this.SUMA_IMPORTE(this.ventahasp.get(6).getCodarti().getCodarti())+" - "+this.NUM_VENTAS(this.ventahasp.get(6).getCodarti().getCodarti()));
+		System.out.println(this.ventahasp.get(6).ToString()+" - SUMA_UNI: "+this.suma_uni(this.ventahasp.get(6).getCodarti().getCodarti())+" - SUMA_IMPORTE: "+
+		this.SUMA_IMPORTE(this.ventahasp.get(6).getCodarti().getCodarti())+" - NUM_VENTAS: "+this.NUM_VENTAS(this.ventahasp.get(6).getCodarti().getCodarti()));
 
 		   System.out.println("SUMA DE UNIDADES VENDIDAS: "+sumaunidadestotales(0));
 		  System.out.println("SUMA DE IMPORTES TOTALES: "+this.suma_importe_total());
@@ -95,7 +95,7 @@ public class Ventas {
 		
 		 
 	
-	
+	///suma de todas de las unidades de todos los articulos vendidos
 	
 	public float sumaunidadestotales(float n) {
 		this.suma_total_l.add(n);
@@ -107,7 +107,7 @@ public class Ventas {
 		
 		return total ;
 	}
-	
+	//suma de las unidades de cada articulo
 	public float suma_uni(int cod_art) {
 		 float n=0;
 		for(int i=0; i<this.listven.size(); i++) {
@@ -125,11 +125,11 @@ public class Ventas {
 	}
 	
 	
-	
+	//suma del importe de cada articulo
 	public float SUMA_IMPORTE(int cod_art) {
 		float n=0;
 		float pvp=0;
-		System.out.println(cod_art+"aerttt");
+	
 
 	n= this.ventahasp.get(cod_art).getCodarti().getPvp()*this.suma_uni(cod_art);
 	this.lineaVenta.put(cod_art, n);
@@ -142,7 +142,7 @@ public class Ventas {
 		
 		
 	}
-		
+		//es el contador de ventas del artículo
 	public int NUM_VENTAS(int cod_art) {
 		int c=0;
 		for(int i=0; i<this.listven.size(); i++) {
@@ -154,12 +154,12 @@ public class Ventas {
 	
 		this.MaxVenta.put(cod_art, c);
 		
-/////////////////////
+
 		
 		return c;
 	}
 	
-
+//importe totales de todos los articulos
 	
 	public float suma_importe_total() {
 	
@@ -175,7 +175,8 @@ public class Ventas {
 		
 	}
 	
-	///////----------------------------------------------------------
+	//es la suma de los importes del artículo de las ventas de 
+	//ese cliente (PVP del artículo por las unidades vendidas).
 	public float TOTAL_IMPORTE(int ncli) {
 		
 	float importe = 0;
@@ -189,6 +190,7 @@ public class Ventas {
      return importe;
     }
 	
+	//es el número de ventas que ha realizado el cliente.
 
 	public int NUM_VENTAS_CLIENTE(int ncli) {
 		
@@ -203,8 +205,10 @@ public class Ventas {
 		
 	}
 	
-	public int articulo_mas_vendido(){
-		float n = 0;
+	
+	//Nombre del artículo más vendido (más número de ventas).
+	public String  articulo_mas_vendido(){
+		int n = 0;
 		int art = 0;
 
 for (Entry<Integer, Integer> entry : this.MaxVenta.entrySet()) {
@@ -213,10 +217,13 @@ for (Entry<Integer, Integer> entry : this.MaxVenta.entrySet()) {
    if(entry.getValue()>n) {
 	   n=entry.getValue();
 	   art=key;
+	   
    }
 }
-		return art;
+		return "El Articulo más vendido es el "+art+" con "+n+" ventas realizadas";
 	}
+	
+	//Media de importe de ventas por artículo.
 	
 	public void media_por_articulo() {
 	
@@ -235,37 +242,40 @@ for (Entry<Integer, Integer> entry : this.MaxVenta.entrySet()) {
 
 	}
 	
+	//Nombre del cliente que más ha gastado (total importe de cliente máximo).
 	public int cliente_maximo() {
 		float n = 0;
 		int cli = 0;
 
-for (Entry<Integer, Float> entry : this.MaxCliente.entrySet()) {
-    Integer key = entry.getKey();
-    Object value = entry.getValue();
-   if(entry.getValue()>n) {
+		for (Entry<Integer, Float> entry : this.MaxCliente.entrySet()) {
+		 Integer key = entry.getKey();
+		 Object value = entry.getValue();
+		 if(entry.getValue()>n) {
 	   n=entry.getValue();
 	   cli=key;
-   }
-}
+		 }
+		}
 		return cli;
 	}
+	
+	//Nombre de cliente con más ventas (más número de ventas).
 	
 	public int cliente_mas_ventas(){
 		float n = 0;
 		int cli = 0;
 		
-for (Entry<Integer, Integer> entry : this.MaxVentaCliente.entrySet()) {
+		for (Entry<Integer, Integer> entry : this.MaxVentaCliente.entrySet()) {
 
-    Integer key = entry.getKey();
-    Object value = entry.getValue();
-   if(entry.getValue()>n) {
-	   n=entry.getValue();
-	   cli=key;
-   }
+		    Integer key = entry.getKey();
+		    Object value = entry.getValue();
+		   if(entry.getValue()>n) {
+			   n=entry.getValue();
+			   cli=key;
+		   }
   
-}
-return cli;
-	}
+			}
+			return cli;
+				}
 	
 
 	public void setCodventa(int codventa) {
